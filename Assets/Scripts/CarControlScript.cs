@@ -17,17 +17,23 @@ public class CarControlScript : MonoBehaviour
 
     void Update()
     {        
-        speed = Vector3.forward * Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+        speed = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime * Vector3.forward;
         transform.Translate(speed);
         if (speed != Vector3.zero)
         {
-            transform.Rotate(0, Input.GetAxis("Horizontal") * 70 * Time.deltaTime, 0);
+            var rotation = Input.GetAxis("Horizontal") * 70 * Time.deltaTime * Vector3.up;
+            transform.Rotate(rotation);
+            if (rotation != Vector3.zero)
+            {
+                // Align front wheels in the direction of rotation
+                
+            }
         }
     }
 
     void LateUpdate()
     {
-        SwitchCameras(speed != Vector3.zero);
+        //SwitchCameras(speed != Vector3.zero);
     }
 
     void SwitchCameras(bool isMoving)
