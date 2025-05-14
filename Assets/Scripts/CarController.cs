@@ -1,13 +1,17 @@
 using UnityEngine;
 
-public class CarControlScript : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private Camera mainCamera;
     private Vector3 speed;
+    public Transform Wheel_fl;
+    public Transform Wheel_fr;
     public Vector3 sideViewOffset;
     public Vector3 driverViewOffset = new (0f, 4f, 1.4f);
     public float smoothSpeed = 5f;
     public float MoveSpeed = 10f;
+    public float maxSteerAngle = 30f;
+    public float steerSpeed = 5f;
 
     void Start()
     {
@@ -23,16 +27,26 @@ public class CarControlScript : MonoBehaviour
         {
             var rotation = Input.GetAxis("Horizontal") * 70 * Time.deltaTime * Vector3.up;
             transform.Rotate(rotation);
-            if (rotation != Vector3.zero)
+            if (rotation == Vector3.zero)
+            {                 
+                Wheel_fl.localRotation = Quaternion.identity;
+                Wheel_fr.localRotation = Quaternion.identity;
+            }
+            else
             {
-                // Align front wheels in the direction of rotation
-                
+                float steerInput = Input.GetAxis("Horizontal") * maxSteerAngle;
+
+                Quaternion targetRotation = Quaternion.Euler(0, steerInput, 0);
+
+                Wheel_fl.localRotation = Quaternion.Lerp(Wheel_fl.localRotation, targetRotation, Time.deltaTime * steerSpeed);
+                Wheel_fr.localRotation = Quaternion.Lerp(Wheel_fr.localRotation, targetRotation, Time.deltaTime * steerSpeed);
             }
         }
     }
 
     void LateUpdate()
     {
+        // The following code has been commented out because it was causing the camera to switch views too frequently.
         //SwitchCameras(speed != Vector3.zero);
     }
 
