@@ -4,25 +4,27 @@ public class CarController : MonoBehaviour
 {
     private Camera mainCamera;
     private Vector3 speed;
-    public Transform Wheel_fl;
-    public Transform Wheel_fr;
+    private Vector3 startPosition;
+    public Transform wheel_fl;
+    public Transform wheel_fr;
     public Vector3 sideViewOffset = new(0, 0, 0);
     public Vector3 driverViewOffset = new (0f, 1.4f, 1);
     public float smoothSpeed = 5f;
-    public float MoveSpeed = 10f;
+    public float moveSpeed = 10f;
     public float maxSteerAngle = 30f;
     public float steerSpeed = 5f;
-    public bool isMoving = false;
+    public bool switchCameras = false;
 
     void Start()
     {
         mainCamera = Camera.main;
+        startPosition = transform.position;
         sideViewOffset = mainCamera.transform.position - transform.position;
     }
 
     void Update()
     {        
-        speed = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime * Vector3.forward;
+        speed = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime * Vector3.forward;
         transform.Translate(speed);
         if (speed != Vector3.zero)
         {
@@ -30,24 +32,31 @@ public class CarController : MonoBehaviour
             transform.Rotate(rotation);
             if (rotation == Vector3.zero)
             {                 
-                Wheel_fl.localRotation = Quaternion.identity;
-                Wheel_fr.localRotation = Quaternion.identity;
+                wheel_fl.localRotation = Quaternion.identity;
+                wheel_fr.localRotation = Quaternion.identity;
             }
             else
             {
                 float steerInput = Input.GetAxis("Horizontal") * maxSteerAngle;
 
-                Quaternion targetRotation = Quaternion.Euler(0, steerInput, 0);
+                Quaternion targetRotation = Quaternion.Euler(Vector3.up * steerInput);
 
-                Wheel_fl.localRotation = Quaternion.Lerp(Wheel_fl.localRotation, targetRotation, Time.deltaTime * steerSpeed);
-                Wheel_fr.localRotation = Quaternion.Lerp(Wheel_fr.localRotation, targetRotation, Time.deltaTime * steerSpeed);
+                wheel_fl.localRotation = Quaternion.Lerp(wheel_fl.localRotation, targetRotation, Time.deltaTime * steerSpeed);
+                wheel_fr.localRotation = Quaternion.Lerp(wheel_fr.localRotation, targetRotation, Time.deltaTime * steerSpeed);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Reset the car's position and rotation
+            transform.position = startPosition;
+            transform.rotation = Quaternion.identity;
         }
     }
 
     void LateUpdate()
     {
-        SwitchCameras(speed != Vector3.zero);
+        if (switchCameras) SwitchCameras(speed != Vector3.zero);
     }
 
     void SwitchCameras(bool isMoving)

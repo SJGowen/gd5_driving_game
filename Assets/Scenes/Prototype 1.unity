@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 592092009}
-  cameraOffset: {x: 0, y: 1.1, z: 0}
+  cameraOffset: {x: 0, y: 1.1, z: 0.25}
 --- !u!114 &534669908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,15 +783,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1357a25e698e004d8f190100ad35725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wheel_fl: {fileID: 66420867}
-  Wheel_fr: {fileID: 1414708140}
+  wheel_fl: {fileID: 66420867}
+  wheel_fr: {fileID: 1414708140}
   sideViewOffset: {x: 0, y: 0, z: 0}
   driverViewOffset: {x: 0, y: 1.4, z: 1}
   smoothSpeed: 5
-  MoveSpeed: 10
+  moveSpeed: 10
   maxSteerAngle: 30
   steerSpeed: 5
-  isMoving: 0
+  switchCameras: 0
 --- !u!4 &592092009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417704, guid: 68840c673a0b18e41a044ed077548d55, type: 3}
