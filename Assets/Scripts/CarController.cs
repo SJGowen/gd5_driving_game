@@ -6,12 +6,13 @@ public class CarController : MonoBehaviour
     private Vector3 speed;
     public Transform Wheel_fl;
     public Transform Wheel_fr;
-    public Vector3 sideViewOffset;
-    public Vector3 driverViewOffset = new (0f, 4f, 1.4f);
+    public Vector3 sideViewOffset = new(0, 0, 0);
+    public Vector3 driverViewOffset = new (0f, 1.4f, 1);
     public float smoothSpeed = 5f;
     public float MoveSpeed = 10f;
     public float maxSteerAngle = 30f;
     public float steerSpeed = 5f;
+    public bool isMoving = false;
 
     void Start()
     {
@@ -46,8 +47,7 @@ public class CarController : MonoBehaviour
 
     void LateUpdate()
     {
-        // The following code has been commented out because it was causing the camera to switch views too frequently.
-        //SwitchCameras(speed != Vector3.zero);
+        SwitchCameras(speed != Vector3.zero);
     }
 
     void SwitchCameras(bool isMoving)

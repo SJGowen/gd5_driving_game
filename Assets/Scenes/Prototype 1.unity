@@ -664,7 +664,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 076d32c850001e24a950d2e17e8fe8e2, type: 3}
   m_Name: 
@@ -786,11 +786,12 @@ MonoBehaviour:
   Wheel_fl: {fileID: 66420867}
   Wheel_fr: {fileID: 1414708140}
   sideViewOffset: {x: 0, y: 0, z: 0}
-  driverViewOffset: {x: 0, y: 1.5, z: -2}
+  driverViewOffset: {x: 0, y: 1.4, z: 1}
   smoothSpeed: 5
   MoveSpeed: 10
   maxSteerAngle: 30
   steerSpeed: 5
+  isMoving: 0
 --- !u!4 &592092009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417704, guid: 68840c673a0b18e41a044ed077548d55, type: 3}
