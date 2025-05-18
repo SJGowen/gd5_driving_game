@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Vector3 startPosition;
-    public float speed = 6;
+    public float speed = 20;
     public float turnSpeed = 5f;
     public float maxTurnAngle = 30f;
 
