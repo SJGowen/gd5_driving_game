@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: f1357a25e698e004d8f190100ad35725
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wheel_fl: {fileID: 400002, guid: 576da546347c040428bb0204a37e73d3, type: 3}
+  - wheel_fr: {fileID: 400004, guid: 576da546347c040428bb0204a37e73d3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
